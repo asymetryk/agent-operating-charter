@@ -2,6 +2,9 @@
 
 Modular governance for coding agents in **this** repository. Process lives here; product facts stay in `AGENTS.md`; filled answers live in `CONFIG.md`.
 
+**Re-install / upgrade from:** https://github.com/asymetryk/agent-operating-charter  
+(Paste that URL into the agent and say “re-run intake” or “refresh charter process files”.)
+
 ## Files
 
 | File | Role |
