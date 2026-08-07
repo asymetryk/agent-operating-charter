@@ -23,9 +23,12 @@ repo_name: "example-app"
 
 ## Environments & UAT
 
-- **uat_host:** `shared-uat`
-- **uat_runtime:** `devcontainer`
-- **uat_url_or_path:** `https://uat.example.com`
+- **uat_host:** `shared-uat`           # e.g. Surface WSL host
+- **uat_runtime:** `docker-compose`
+- **uat_url_or_path:** `https://app-a.example.ts.net`  # or rely on uat_instances
+- **uat_instances:** |
+    A | http://100.64.0.1:4173 | https://app-a.example.ts.net
+    B | http://100.64.0.1:4174 | https://app-b.example.ts.net
 - **uat_if_busy:** `spin_new`
 - **localhost_default:** false
 - **preview_env:** `example-app-preview`

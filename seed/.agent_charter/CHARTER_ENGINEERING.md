@@ -37,12 +37,13 @@ When status → **Validating**, run tiers in order. Skip tiers marked N/A on the
 When `CONFIG.md` → `uat_host` is set:
 
 * Deploy or refresh the WP build into the UAT runtime (`uat_runtime` / `uat_url_or_path`).
-* If `uat_if_busy: spin_new`: when no free runtime is available, **provision a new one** — do not queue behind a busy slot (unless human overrides).
-* Prefer configured UAT over laptop localhost when `localhost_default: false`.
-* Re-run Tier 1 (and Tier 2 for UI) **against the UAT URL**, not only against localhost or preview.
-* Attach UAT URL, runtime identity, and proof to the evidence pack.
+* **Instance pools:** If `uat_instances` lists multiple slots (e.g. A/B with LAN + Tailscale HTTPS), pick a **free** instance for the WP. Record which label (A/B/…) was used in the evidence pack.
+* If `uat_if_busy: spin_new`: when no free instance is available, **provision a new one** (or bring up the idle compose service) — do not queue behind a busy slot unless the human overrides.
+* Prefer configured UAT over laptop localhost when `localhost_default: false`. Prefer **Tailscale HTTPS** URLs for human/agent browser proof when both LAN and HTTPS are listed.
+* Re-run Tier 1 (and Tier 2 for UI) **against the chosen UAT URL**, not only against localhost or preview.
+* Attach UAT URL, instance label, runtime identity, and proof to the evidence pack.
 * Fail → **Developing** (or halt per circuit breaker). Preview/staging is **not** a UAT substitute unless CONFIG waives it.
-* `uat_url_or_path: PENDING` → ask once, then record in CONFIG.
+* `uat_url_or_path: PENDING` with no `uat_instances` → ask once, then record in CONFIG.
 
 ### Tier 4 — Repo DoD extras
 

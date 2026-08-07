@@ -25,8 +25,9 @@ repo_name: ""
 
 - **uat_host:** ``                  # e.g. shared workstation, VM pool, k8s, cloud preview
 - **uat_runtime:** ``               # e.g. devcontainer | docker-compose | bare | paas
-- **uat_url_or_path:** ``           # URL, hostname, or compose path (`PENDING` ok at first lock)
-- **uat_if_busy:** `spin_new`       # spin_new | wait | fail
+- **uat_url_or_path:** ``           # primary URL, or use uat_instances below
+- **uat_instances:** ``             # optional pool, e.g. A/B rows: label | lan | https
+- **uat_if_busy:** `spin_new`       # spin_new = use free instance or provision another; wait | fail
 - **localhost_default:** false
 - **preview_env:** ``               # optional pre-prod
 - **production_env:** ``
