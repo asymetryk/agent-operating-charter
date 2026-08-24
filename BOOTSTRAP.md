@@ -24,7 +24,7 @@ rm -rf "$TMP"
    Prefer copying from a local clone of this repo if the human provided a path.
 
 3. Inspect `.agent_charter/CONFIG.md` using the newly installed `SETUP.md`:
-   * If `setup_complete: true` **and** `charter_version: 2` (or newer), and re-setup was not requested → the process-file refresh is complete; show the current CONFIG summary and stop.
+   * If `setup_complete: true` **and** `charter_version: 2` (or newer), and re-setup was not requested → skip steps 4–5, but still perform step 6. If the collaboration surfaces and Bootstrap content pass revalidation, the process-file refresh is complete; continue to step 9. If they fail, set `setup_complete: false` and run the applicable setup steps before WP work.
    * If `charter_version` is missing or below `2`, run the v2 migration. Preserve confirmed values. Map legacy `wp_status_location` only when legacy `wp_status_authority` was OpenProject; otherwise ask for the required OpenProject project and preserve the old tracker only if the human designates it for non-project use.
 4. Read `.agent_charter/SETUP.md` and ask **all §1 questions in one batch**, including the OpenProject project/wiki and Buzz channel locations, labeling defaults as **proposed**. During migration, preserve confirmed values and ask only for missing or contradictory answers.
 5. Run **SETUP §2 mismatch audit** against this repo’s `AGENTS.md`, global agent defaults (if any), and deploy/UAT docs. Show a Pass/Fail table.
