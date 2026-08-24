@@ -1,6 +1,6 @@
 # Assumptions Log
 
-Central log for unverified dependencies. Also comment on the related Work Package.
+Template content for the configured OpenProject Wiki Assumptions Log. Every entry must also be linked from the OpenProject WP and posted in its dedicated Buzz thread.
 
 ## Template entry
 

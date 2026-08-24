@@ -6,10 +6,23 @@ Requires `CONFIG.md` (`setup_complete: true`).
 
 * **Module fencing:** Workers own designated target files only. Do not edit shared utilities, global styles, or schema/migrations without parent approval.
 * **Stub-driven progress:** If backend API or sibling UI is unfinished, code against a stub matching Design/API contracts and log the assumption (`CHARTER_CORE.md`).
+* **Shared context:** Read the OpenProject WP, linked Wiki pages, and dedicated Buzz thread before editing. Keep discussion in that thread.
 * **Graft:** When `graft_required: true`, discover edit points via graft before wide search.
-* **Commit policy:** Follow `CONFIG.md` → `commit_policy`.
+* **Commit policy:** Follow `CONFIG.md` → `commit_policy`; the gate below still applies whenever a commit is authorized.
 
-## 2. Automated validation protocol
+## 2. Pre-commit knowledge and discussion gate
+
+Before every authorized commit:
+
+1. Confirm the OpenProject WP reflects the current scope, status, acceptance criteria, and evidence.
+2. Update the linked OpenProject Wiki pages when the work changes Bootstrap/setup, architecture, shared interfaces, dependencies, runbooks, handoffs, or assumptions.
+3. Use the dedicated Buzz WP thread to resolve open questions and decisions; copy each durable outcome into the OpenProject WP or Wiki.
+4. Post a concise commit-readiness summary in the Buzz thread: changed scope, validation evidence, open blockers, and the commit/branch identity when known.
+5. Verify reciprocal links among the OpenProject WP, relevant Wiki pages, and Buzz thread.
+
+A decision recorded only in Buzz, or shared context left only in a local checkout, blocks commit readiness.
+
+## 3. Automated validation protocol
 
 When status → **Validating**, run tiers in order. Skip tiers marked N/A on the WP.
 
@@ -49,7 +62,7 @@ When `CONFIG.md` → `uat_host` is set:
 
 If a build-loop / DoD doc exists and is in scope, its items apply. Charter tiers must not be weaker without a CONFIG waiver.
 
-## 3. Evidence pack (before Human Review Queue)
+## 4. Evidence pack (before Human Review Queue)
 
 1. Acceptance criteria checklist (pass/fail)
 2. Tier 0 command + exit codes
@@ -59,16 +72,20 @@ If a build-loop / DoD doc exists and is in scope, its items apply. Charter tiers
 6. Open assumptions list (empty or waived)
 7. Branch / PR link
 8. Primary viewport + browser used
+9. OpenProject WP and relevant Wiki links
+10. Dedicated Buzz WP thread with the commit-readiness summary
 
-## 4. Merge & promote orchestration
+## 5. Merge & promote orchestration
 
 When status → **Approved for Merge**, parent orchestrator:
 
-1. Checkout feature branch; update from primary.
-2. Integrate per `CONFIG.md` → `merge_style` (`ff-only-after-rebase` or `squash-via-pr`, etc.). Never force-push primary.
-3. If conflict invalidates an Assumptions Log entry → **Developing** + notes.
-4. Re-run Tier 0 (+ Tier 1 / Tier 3 as CONFIG requires).
-5. Merge → status **Merged**.
+1. Reconcile final Buzz decisions into the OpenProject WP and relevant Wiki pages; verify the Bootstrap/shared context is current.
+2. Verify the Buzz thread contains the latest commit-readiness summary and reciprocal WP/wiki links.
+3. Checkout feature branch; update from primary.
+4. Integrate per `CONFIG.md` → `merge_style` (`ff-only-after-rebase` or `squash-via-pr`, etc.). Never force-push primary.
+5. If conflict invalidates an Assumptions Log entry → **Developing** + notes in OpenProject and the Buzz thread.
+6. Re-run Tier 0 (+ Tier 1 / Tier 3 as CONFIG requires).
+7. Merge → status **Merged**; record the merge identity and outcome on the OpenProject WP and Buzz thread.
 
 ### Promote order (post-merge)
 
@@ -80,6 +97,6 @@ Follow `CONFIG.md` → `promote_order`. Typical pattern:
 
 Do **not** jump laptop → production when UAT is required.
 
-## 5. Skills / tools
+## 6. Skills / tools
 
 Invoke the repo’s configured validation and release skills (Playwright, frontend quality gate, PR workflow, deploy gate, etc.) as named in `CHARTER_ROUTING.md` / CONFIG.

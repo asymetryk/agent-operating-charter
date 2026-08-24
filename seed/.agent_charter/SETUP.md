@@ -1,19 +1,32 @@
 # First-run setup & mismatch audit
 
-Run **once per repo** (or whenever `CONFIG.md` has `setup_complete: false`). Ask the human; do not invent blocking answers. After answers, write `CONFIG.md` from `CONFIG.example.md`, set `setup_complete: true`, and wire repo `AGENTS.md` (see §Wire).
+Run once per repo, whenever `CONFIG.md` has `setup_complete: false`, or whenever `charter_version` is missing or below `2`. Ask the human; do not invent blocking answers. Provision and verify required collaboration surfaces before marking setup complete, then wire repo `AGENTS.md` (see §Wire).
 
 ---
+
+## §0 Upgrade contract
+
+Current config contract: `charter_version: 2`.
+
+For an existing CONFIG with no version or a lower version:
+
+1. Preserve confirmed repo-specific values and waivers.
+2. If legacy `wp_status_authority` was OpenProject, map `wp_status_location` to `openproject_project`. Otherwise leave `openproject_project` unset, ask for the required OpenProject project, and preserve the old tracker only when the human designates it as `non_project_tracker`.
+3. Collect missing `openproject_wiki`, `bootstrap_wiki_page`, `evidence_log`, `assumptions_log`, and `buzz_channel` values through §1.
+4. Keep `setup_complete: false` until the §2 audit passes, the OpenProject project/wiki/Bootstrap page plus Buzz channel are verified reachable, and the Bootstrap page contains the current shared context required by `CHARTER_CORE.md` §4.
+
+An old `setup_complete: true` does not bypass this migration.
 
 ## §1 Primary setup questions
 
 Ask in one batch. Label suggested defaults as **proposed**.
 
-### A. Tracker
+### A. OpenProject and Buzz
 
-1. **Authoritative tracker for project WP status?** (OpenProject, Linear, Jira, GitHub Issues, other)
-2. Project URL / id for that tracker.
-3. Optional **non-project** tracker for adhoc/reminders?
-4. Where do agents attach evidence (logs, screenshots) and assumptions?
+1. **OpenProject project URL / id?** OpenProject is the authoritative project WP tracker.
+2. **OpenProject Wiki URL / id, Bootstrap page, and pages/sections for evidence and assumptions?**
+3. **Buzz project channel URL / name?** Select one existing project channel or create one after the human confirms setup.
+4. Optional **non-project** tracker for adhoc/reminders?
 
 ### B. Viewport & browser
 
@@ -72,16 +85,18 @@ Compare before locking:
 ### Checks
 
 1. `AGENTS.md` exists (create minimal stub + charter pointer if missing).
-2. Tracker authority agrees across AGENTS / global / CONFIG (or CONFIG explicitly overrides with human sign-off).
-3. Browser: no Edge-by-default conflict.
-4. Imagegen: no undeclared provider as default.
-5. Viewport: docs vs CONFIG `primary_viewport`.
-6. UAT vs production: docs must not skip UAT if CONFIG requires it.
-7. Preview ≠ UAT unless waived.
-8. Graft: if `graft/` present, AGENTS or CONFIG should acknowledge it.
-9. DoD: test commands / tiers not weaker than existing build contracts without waiver.
-10. Duplicate process bloat: prefer “see `.agent_charter/`” over copying the full board into AGENTS.
-11. Commit policy recorded.
+2. OpenProject is the project WP authority across AGENTS / global / CONFIG.
+3. OpenProject project, Wiki, Bootstrap page, evidence location, and assumptions location are recorded and reachable.
+4. Buzz is the discussion authority; one project channel is recorded and the one-thread-per-WP policy is not contradicted.
+5. Browser: no Edge-by-default conflict.
+6. Imagegen: no undeclared provider as default.
+7. Viewport: docs vs CONFIG `primary_viewport`.
+8. UAT vs production: docs must not skip UAT if CONFIG requires it.
+9. Preview ≠ UAT unless waived.
+10. Graft: if `graft/` present, AGENTS or CONFIG should acknowledge it.
+11. DoD: test commands / tiers not weaker than existing build contracts without waiver.
+12. Duplicate process bloat: prefer “see `.agent_charter/`” over copying the full board into AGENTS.
+13. Commit policy recorded and compatible with the pre-commit OpenProject/Buzz gate.
 
 ### Report format
 
@@ -103,8 +118,8 @@ Add (or equivalent):
 ```markdown
 ## Agent Charter
 
-- Follow `.agent_charter/` for work-package lifecycle, North Stars, validation, and routing.
-- Repo-specific answers: `.agent_charter/CONFIG.md`.
+- Follow `.agent_charter/` for the OpenProject work-package lifecycle and Wiki knowledge, Buzz discussion threads, North Stars, validation, and routing.
+- Repo-specific OpenProject and Buzz locations and other answers: `.agent_charter/CONFIG.md`.
 - If `CONFIG.md` is missing or `setup_complete: false`, run `.agent_charter/SETUP.md` before feature work.
 ```
 
@@ -114,7 +129,9 @@ Do not duplicate the full status machine into AGENTS.
 
 ## §4 Completion
 
-1. Write `CONFIG.md`.
-2. Set `setup_complete: true` and `setup_completed_at` after human confirms.
-3. Show a 5-line CONFIG summary.
-4. Only then allow normal WP work under the charter.
+1. Verify that the OpenProject project, Wiki, Bootstrap page, and Buzz project channel exist and are reachable. Obtain action-time human confirmation before creating or changing an external surface. Missing required surfaces block completion.
+2. Populate or reconcile the Bootstrap page with the minimum shared context in `CHARTER_CORE.md` §4. An empty or stale page blocks completion.
+3. Write `CONFIG.md`.
+4. Set `charter_version: 2`, `setup_complete: true`, and `setup_completed_at` only after the verification, Bootstrap reconciliation, and human answers are complete.
+5. Show a concise CONFIG summary covering OpenProject project/wiki, Buzz channel, viewport, UAT, routing, and tests.
+6. Only then allow normal WP work under the charter.

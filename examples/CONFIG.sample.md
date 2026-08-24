@@ -1,5 +1,6 @@
 ---
 # Fictional example only — do not copy as-is into a real product without SETUP.
+charter_version: 2
 setup_complete: true
 setup_completed_at: "2026-01-15"
 repo_name: "example-app"
@@ -7,13 +8,19 @@ repo_name: "example-app"
 
 # Agent Charter — project config (example)
 
-## Tracker
+## Work management and discussion
 
 - **wp_status_authority:** `OpenProject`
-- **wp_status_location:** `https://openproject.example.com/projects/example-app`
+- **openproject_project:** `https://openproject.example.com/projects/example-app`
+- **openproject_wiki:** `https://openproject.example.com/projects/example-app/wiki`
+- **bootstrap_wiki_page:** `https://openproject.example.com/projects/example-app/wiki/bootstrap`
+- **evidence_log:** OpenProject WP attachments + Wiki evidence index
+- **assumptions_log:** OpenProject Wiki `Assumptions Log`
+- **discussion_authority:** `Buzz`
+- **buzz_channel:** `buzz://example-app`
+- **buzz_thread_policy:** `one thread per OpenProject WP`
+- **buzz_thread_naming:** `WP <id> — <title>`
 - **non_project_tracker:** `Baserow`  # adhoc / reminders only
-- **evidence_log:** OpenProject WP attachments + `docs/evidence/`
-- **assumptions_log:** `docs/assumptions-log.md`
 
 ## Viewport
 
