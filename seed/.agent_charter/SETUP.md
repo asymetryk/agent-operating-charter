@@ -12,7 +12,7 @@ For an existing CONFIG with no version or a lower version:
 
 1. Preserve confirmed repo-specific values and waivers.
 2. If legacy `wp_status_authority` was OpenProject, map `wp_status_location` to `openproject_project`. Otherwise leave `openproject_project` unset, ask for the required OpenProject project, and preserve the old tracker only when the human designates it as `non_project_tracker`.
-3. Collect missing `openproject_wiki`, `bootstrap_wiki_page`, `evidence_log`, `assumptions_log`, and `buzz_channel` values through §1.
+3. Validate every existing collaboration value against the v2 contract. `evidence_log` must be an OpenProject WP attachment/comment location or a page in the configured OpenProject Wiki; `assumptions_log` must be a page/section in that Wiki. Treat local repo paths, non-OpenProject URLs, and ambiguous legacy labels as missing, then collect replacements plus any missing `openproject_wiki`, `bootstrap_wiki_page`, or `buzz_channel` through §1.
 4. Keep `setup_complete: false` until the §2 audit passes, the OpenProject project/wiki/Bootstrap page plus Buzz channel are verified reachable, and the Bootstrap page contains the current shared context required by `CHARTER_CORE.md` §4.
 
 An old `setup_complete: true` does not bypass this migration.
@@ -86,7 +86,7 @@ Compare before locking:
 
 1. `AGENTS.md` exists (create minimal stub + charter pointer if missing).
 2. OpenProject is the project WP authority across AGENTS / global / CONFIG.
-3. OpenProject project, Wiki, Bootstrap page, evidence location, and assumptions location are recorded and reachable.
+3. OpenProject project, Wiki, and Bootstrap page are recorded and reachable; `evidence_log` resolves to that OpenProject project/Wiki; `assumptions_log` resolves inside that Wiki. Local repo paths and non-OpenProject destinations fail.
 4. Buzz is the discussion authority; one project channel is recorded and the one-thread-per-WP policy is not contradicted.
 5. Browser: no Edge-by-default conflict.
 6. Imagegen: no undeclared provider as default.

@@ -54,7 +54,7 @@ If your team never does UI, never uses UAT, or never parallels agents, you can s
 |------|--------|
 | Git + a product repo | Charter installs as `.agent_charter/` inside it |
 | A coding agent that can read markdown + run shell | Cursor, Codex, Claude Code, etc. |
-| Network once at install | Clone/fetch this template (or use a local clone path) |
+| Ongoing network access | Fetch/install the template, then reach the configured OpenProject and Buzz services during normal WP work and before commits/merges |
 | Human answers at intake | OpenProject project/wiki and Bootstrap page, Buzz channel, viewport, test commands, routing, UAT (or explicit “none” where allowed) |
 | OpenProject access | Project Work Packages and project Wiki |
 | Buzz access | One project channel; one dedicated thread per OpenProject WP |
