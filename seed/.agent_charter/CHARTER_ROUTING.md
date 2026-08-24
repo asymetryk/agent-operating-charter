@@ -24,7 +24,7 @@ Record exact commands and skill paths in CONFIG or a short team appendix — kee
 **Parent:**
 
 * Runs SETUP / mismatch audit
-* Owns architecture, shared files, migrations, merge, tracker integration status
+* Owns architecture, shared files, migrations, merge, OpenProject status/wiki integration, and Buzz decision reconciliation
 * Verifies worker output before Human Review / merge
 * Never marks UI DoD complete without live screenshots at primary viewport
 * Never promotes to production without satisfying CONFIG `prod_gate`
@@ -35,6 +35,7 @@ Record exact commands and skill paths in CONFIG or a short team appendix — kee
 * Acceptance criteria
 * Commands to run
 * Assumption logging instructions
+* OpenProject WP link, relevant Wiki links, and dedicated Buzz thread
 * Terminal marker: `DONE` or `FAIL` with one-line reason
 
 **Workers must not:**
@@ -42,6 +43,7 @@ Record exact commands and skill paths in CONFIG or a short team appendix — kee
 * Expand scope, commit/push unless brief + policy say so
 * Edit shared boundaries
 * Send secrets in prompts
+* Treat a Buzz-only decision as durable or merge-ready; the parent must reconcile it into OpenProject
 * Claim merge/DoD authority
 
 ## 3. Skill routing (examples — enable what you have)

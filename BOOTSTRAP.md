@@ -10,26 +10,28 @@ Do **not** wait for a long pasted prompt. Fetch this file + `seed/.agent_charter
 ## Immediate actions
 
 1. Confirm the open workspace root (product repo). If unclear, ask once: “Install charter into which repo path?”
-2. If `.agent_charter/CONFIG.md` exists with `setup_complete: true` and they did not ask to re-run setup → show current CONFIG summary and stop (or ask whether to re-run).
-3. Materialize seed files:
+2. Materialize the current seed process files **before** evaluating config or running migrations:
 
 ```bash
 TMP=$(mktemp -d)
 git clone --depth 1 https://github.com/asymetryk/agent-operating-charter "$TMP/aoc"
 mkdir -p .agent_charter
-# Refresh process files; do not clobber a locked CONFIG unless re-setup was requested
+# Refresh process files; CONFIG.md is not part of the seed and must be preserved
 cp -R "$TMP/aoc/seed/.agent_charter/." .agent_charter/
 rm -rf "$TMP"
-# If CONFIG.md was overwritten from example, keep setup_complete: false until wizard finishes
 ```
 
    Prefer copying from a local clone of this repo if the human provided a path.
 
-4. Read `.agent_charter/SETUP.md` and ask **all §1 questions in one batch**, labeling defaults as **proposed** (see SETUP + README defaults).
+3. Inspect `.agent_charter/CONFIG.md` using the newly installed `SETUP.md`:
+   * If `setup_complete: true` **and** `charter_version: 2` (or newer), and re-setup was not requested → the process-file refresh is complete; show the current CONFIG summary and stop.
+   * If `charter_version` is missing or below `2`, run the v2 migration. Preserve confirmed values. Map legacy `wp_status_location` only when legacy `wp_status_authority` was OpenProject; otherwise ask for the required OpenProject project and preserve the old tracker only if the human designates it for non-project use.
+4. Read `.agent_charter/SETUP.md` and ask **all §1 questions in one batch**, including the OpenProject project/wiki and Buzz channel locations, labeling defaults as **proposed**. During migration, preserve confirmed values and ask only for missing or contradictory answers.
 5. Run **SETUP §2 mismatch audit** against this repo’s `AGENTS.md`, global agent defaults (if any), and deploy/UAT docs. Show a Pass/Fail table.
-6. After the human confirms answers, write `.agent_charter/CONFIG.md`, set `setup_complete: true`, wire the short Agent Charter pointer into `AGENTS.md` (see `templates/AGENTS.snippet.md` in this repo).
-7. Optionally offer to copy `templates/*` into `docs/` (assumptions log, compare sheet, WP checklist) — ask before inventing paths.
-8. List `.agent_charter/`, print a 5-line CONFIG summary, **stop**. Do not start feature work unless asked.
+6. Verify that the configured OpenProject project, Wiki, Bootstrap page, and Buzz project channel exist and are reachable. After obtaining action-time human confirmation for external mutations, create missing surfaces and populate or reconcile the Bootstrap page with the minimum shared context in `CHARTER_CORE.md` §4. A missing, empty, or stale required surface leaves setup incomplete.
+7. Write `.agent_charter/CONFIG.md` with `charter_version: 2` and `setup_complete: true` only after step 6 passes; wire the short Agent Charter pointer into `AGENTS.md` (see `templates/AGENTS.snippet.md`).
+8. Offer `templates/*` as additional OpenProject Wiki content seeds (assumptions log and WP checklist) and copy visual comparison assets into `docs/` when appropriate; do not invent paths.
+9. List `.agent_charter/`, print a concise CONFIG summary including OpenProject and Buzz locations, **stop**. Do not start feature work unless asked.
 
 ---
 
@@ -37,6 +39,9 @@ rm -rf "$TMP"
 
 | Topic | Proposed |
 |-------|----------|
+| Work packages | OpenProject |
+| Shared agent knowledge | OpenProject Wiki, including a Bootstrap page |
+| Discussion | One Buzz project channel; one thread per OpenProject WP |
 | Viewport | `1920x1080` (project-specific later) |
 | Browser | Chrome |
 | UAT busy policy | `spin_new` when a shared UAT exists |
@@ -46,7 +51,7 @@ rm -rf "$TMP"
 | Circuit breaker | 2 strikes |
 | Imagegen | only the path declared in CONFIG |
 
-Trackers, models, UAT host URL, promote order, and test commands are **required human answers** (or explicit “use proposed X”).
+OpenProject project/wiki locations, Bootstrap page, Buzz channel, models, UAT host URL, promote order, and test commands are **required human answers** (or explicit acceptance of a proposed value).
 
 ---
 

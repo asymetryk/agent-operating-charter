@@ -66,7 +66,7 @@ Brand: **Asymetryk** as publisher / steward of the open pack — not a hard sell
 | Public MIT repo live | https://github.com/asymetryk/agent-operating-charter |
 | URL-first install via `BOOTSTRAP.md` | README + BOOTSTRAP in that repo |
 | Modules: CORE / DESIGN / ENGINEERING / ROUTING + SETUP/CONFIG | `seed/.agent_charter/` |
-| Optional deps called out honestly | README “Dependencies” section |
+| Required OpenProject/Buzz contract and optional dependencies called out honestly | README “Dependencies” section |
 | Worked example: SHI presentation Surface A/B UAT | `shi-presentation-a/b.tail21f530.ts.net` (internal pattern; **do not** over-expose private IPs in public posts unless Howard approves) |
 | Worked example: AIC Surface A/B UAT live | `https://aic-cortex-a.tail21f530.ts.net` / `https://aic-cortex-b.tail21f530.ts.net` (Tailscale; audience may not resolve — prefer “shared UAT pool on a team workstation” language publicly) |
 | AIC branch with charter + Surface compose | `cursor/agent-charter-surface-uat` on Asymetryk-Infrastructure-Cortex (pushed) |
@@ -82,7 +82,7 @@ Brand: **Asymetryk** as publisher / steward of the open pack — not a hard sell
 3. **Optimistic concurrency with receipts** — stubs + Assumptions Log + merge gate.  
 4. **UI with a North Star** — mockup lock before code; one primary viewport.  
 5. **Honest definition of done** — tests → browser → visual → shared UAT → prod.  
-6. **Vendor-agnostic with sharp defaults** — declare your router/imagegen/tracker in CONFIG.
+6. **Durable record + focused discussion** — OpenProject WPs/Wikis are authoritative; Buzz provides one project channel and one thread per WP. Model and infrastructure lanes remain configurable.
 
 ---
 
@@ -100,7 +100,7 @@ Brand: **Asymetryk** as publisher / steward of the open pack — not a hard sell
 
 ## Campaign constraints / do-nots
 
-- Do **not** claim the charter requires OmniRoute, graft, OpenProject, or Cloudflare.  
+- Do **not** claim the charter requires OmniRoute, graft, or Cloudflare. It **does** require OpenProject for WPs/Wikis and Buzz for discussion.
 - Do **not** publish secrets, OAuth paths, or private Tailscale IPs without approval.  
 - Do **not** frame as “set and forget autonomous agents.” Human review and prod gates stay explicit.  
 - Do **not** turn the Substack into an AIC product launch — charter is the hero.  
@@ -144,4 +144,4 @@ Brand: **Asymetryk** as publisher / steward of the open pack — not a hard sell
 
 ## Resume note (for the CMO agent)
 
-Howard wants a **Substack + LinkedIn campaign** about the open-source **Agent Operating Charter** (https://github.com/asymetryk/agent-operating-charter): URL-paste install, modular agent governance (lifecycle, North Star, validation, routing), vendor-agnostic CONFIG. Write drafts only; CTA = GitHub + intake wizard. Use operator tone; AIC/Surface A/B is optional proof of “shared UAT before prod,” not the product pitch. Do not publish until Howard approves.
+Howard wants a **Substack + LinkedIn campaign** about the open-source **Agent Operating Charter** (https://github.com/asymetryk/agent-operating-charter): URL-paste install, OpenProject WPs/Wikis, Buzz per-WP discussion threads, modular agent governance (lifecycle, North Star, validation, routing), and configurable model/infrastructure lanes. Write drafts only; CTA = GitHub + intake wizard. Use operator tone; AIC/Surface A/B is optional proof of “shared UAT before prod,” not the product pitch. Do not publish until Howard approves.

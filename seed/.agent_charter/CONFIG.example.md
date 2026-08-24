@@ -1,5 +1,6 @@
 ---
 # Copy to CONFIG.md during SETUP. Do not commit secrets.
+charter_version: 2
 setup_complete: false
 setup_completed_at: null
 repo_name: ""
@@ -7,13 +8,19 @@ repo_name: ""
 
 # Agent Charter — project config
 
-## Tracker
+## Work management and discussion
 
-- **wp_status_authority:** ``       # e.g. OpenProject | Linear | Jira | GitHub Issues | Other
-- **wp_status_location:** ``        # project URL / id
-- **non_project_tracker:** ``       # optional: adhoc / reminders only
-- **evidence_log:** ``              # where screenshots, test logs, comments go
-- **assumptions_log:** ``           # wiki page, doc path, or tracker field
+- **wp_status_authority:** `OpenProject`
+- **openproject_project:** ``        # required project URL / id
+- **openproject_wiki:** ``           # required project Wiki URL / id
+- **bootstrap_wiki_page:** ``        # required Bootstrap/shared-context page URL / title
+- **evidence_log:** ``               # OpenProject WP attachments/comments or Wiki page
+- **assumptions_log:** ``            # OpenProject Wiki page / section
+- **discussion_authority:** `Buzz`
+- **buzz_channel:** ``               # required project channel URL / name
+- **buzz_thread_policy:** `one thread per OpenProject WP`
+- **buzz_thread_naming:** `WP <id> — <title>`
+- **non_project_tracker:** ``        # optional: adhoc / reminders only
 
 ## Viewport (screenshot target — not the UAT host)
 

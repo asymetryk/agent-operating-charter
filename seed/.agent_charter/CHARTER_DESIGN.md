@@ -18,7 +18,7 @@ Before writing front-end code, establish a visual benchmark during **Mocked Up**
    * **Efficiency** — minimize clicks / cognitive load?
    * **Alignment** — design tokens / existing product language?
 4. **Iterative refinement:** Re-prompt until `persona_threshold` is met.
-5. **Human lock:** If `human_north_star_approval_required: true`, attach winner and **wait for human approval** before **Developing**.
+5. **Human lock:** If `human_north_star_approval_required: true`, discuss and obtain human approval in the dedicated Buzz WP thread, then record that approval on the OpenProject WP before **Developing**.
 6. **Artifact:** Save as `NORTH_STAR_WP_[ID].png` on the WP / `evidence_log` path (and repo docs path if used, e.g. `docs/**/mockups/`).
 
 ## 2. Primary viewport constraint
